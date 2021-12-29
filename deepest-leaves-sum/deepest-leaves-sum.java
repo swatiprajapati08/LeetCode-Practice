@@ -33,6 +33,28 @@ class Solution {
                 //sum = currSum;
             }
         }
+        
+//         DFS
+        
+    int deepest = 0,sum = 0;
+    public int deepestLeavesSum(TreeNode root) {
+        DS(root,0);
+        return sum;
+    }
+    void DS(TreeNode root, int depth){
+        if(root == null)return;
+        
+        if(deepest == depth) 
+            sum += root.val;
+        
+        
+        else if(deepest < depth){
+            sum = root.val;
+            deepest = depth;
+        }
+        DS(root.left,depth + 1);
+        DS(root.right,depth + 1);
+    }
         return sum;
     }
 }
