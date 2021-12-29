@@ -1,46 +1,23 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        //insert a interval
-        int n = intervals.length;
-        int res[][] = new int[n + 1][2];
-        for(int i = 0; i < n;i++)
-            res[i] = intervals[i];
-        res[n] = newInterval;
-        
-        return merge(res);
-    }
-     public int[][] merge(int[][] intervals) {
-      
-        Arrays.sort(intervals,(a,b) -> {return a[0] - b[0];});
-        ArrayList<int[]> ans = new ArrayList<>();
-        
-        int limit[] = intervals[0];
-        
-        for(int i = 1; i < intervals.length;i++){
-            if(limit[1] >= intervals[i][0]) //7 > 5 overlapping
-            {
-                limit[1] = Math.max(limit[1],intervals[i][1]);
+    
+         List<int[]> ans = new ArrayList<>();
+        for(int i = 0; i < intervals.length;i++){
+            
+        /*1. No overlap and toAdd appears before current interval, add toAdd to result.*/
+            if(intervals[i][0] > newInterval[1]){
+                ans.add(newInterval);
+                newInterval = intervals[i];
             }
-            else{
-               //deep copy
-                int res[] = new int[2];
-                res[0] = limit[0];
-                res[1] = limit[1];
-                ans.add(res);
-                
-                limit[0] = intervals[i][0];
-                limit[1] = intervals[i][1];
+             /*2. Has overlap, update the toAdd to the merged interval.*/
+            else if(intervals[i][1] >= newInterval[0]){
+                newInterval = new int[]{Math.min(intervals[i][0],newInterval[0]),                                                           Math.max(intervals[i][1],newInterval[1])};
             }
+            /*3. No overlap and toAdd appears after current interval, add current interval to result.*/
+            else
+                ans.add(intervals[i]);
         }
-        ans.add(limit);
-        
-        int temp[][] = new int[ans.size()][2];
-        
-       for(int i = 0; i< ans.size();i++){
-           int x[] = ans.get(i);
-           temp[i][0] = x[0];
-           temp[i][1] = x[1];
-       }
-    return temp;
+        ans.add(newInterval);
+        return ans.toArray(new int[ans.size()][2]);
     }
 }
