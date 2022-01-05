@@ -14,6 +14,26 @@ class Solution {
                     dp[i][j] = Math.max(dp[i - 1][j],dp[i][j - 1]);
             }
         }
+        //printing LCS
+        StringBuilder sb = new StringBuilder();
+        int index1 = m , index2 = n;
+        while(index1 > 0 && index2 > 0){
+            if(text1.charAt(index1 - 1) == text2.charAt(index2 - 1)){
+                sb.append(text1.charAt(index1 - 1));
+                index1--;
+                index2--;
+            }
+            else{
+                //do not match
+                if(dp[index1 - 1][index2] > dp[index1][index2-1])
+                    index1--;
+                else
+                    index2--;
+            }
+        }
+        System.out.println(sb.reverse().toString());
+        
+        
         return dp[m][n];
     }
 }
