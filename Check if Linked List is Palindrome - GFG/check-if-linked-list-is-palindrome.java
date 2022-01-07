@@ -99,28 +99,48 @@ class Node
 class Solution
 {
 //Function to check whether the list is palindrome. 
-    static Node left;
     public boolean isPalindrome(Node head) {
-        left = head;
-        return Helper(head);
-    }
-    
-    static boolean Helper(Node right)
-    {
-        if(right == null)
-            return true;
+        if(head == null || head.next == null)
+         return true;
+         
+         
+        // find middle then reverse
+        Node slow = head;
+        Node fast = head;
+        Node l1 = head;
         
-        boolean ans = Helper(right.next);
+        while(fast.next != null && fast.next.next !=null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
         
-        if(ans == false)
+        //reverse the linkedList from  mid to last
+        
+        Node curr = slow.next;
+        Node prev = null;
+        Node next = null;
+        
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        Node l2 = prev;
+        
+        
+        //reverse the linkedList;
+        
+        while(l1 != null &&  l2 !=null )
+        {
+            if(l1.data != l2.data)
             return false;
-        
-        if(left.data != right.data)
-            return false;
-        
-        left = left.next;
-        right = right.next;
-        
+            
+            l1 = l1.next;
+            l2 = l2.next;
+        }
         return true;
-    }
+     }
 }
