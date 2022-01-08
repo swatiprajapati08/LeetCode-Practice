@@ -117,23 +117,23 @@ class GfG {
 class Solution {
     // Function to return the diameter of a Binary Tree.
     int diameter(Node root) {
-        int result = Integer.MIN_VALUE;
-        int[] array = {result};
-         find(root, array);
-         return array[0];
-        
+        int max = 0;
+        int ans[] ={max};
+        find(root,ans);
+        return ans[0];
+       
     }
     
-    int find(Node root,int[] res) {
-        // Your code here
-        if(root == null)
+    int find(Node root,int res[]){
+         if(root == null)
         return 0;
         
         int l = find(root.left,res);
         int r = find(root.right,res);
         
-        int temp = 1 + Math.max(l,r); // i can't be answer
-        res[0] = Math.max(res[0],1+r+l);
-        return temp;
+        int dia = l + r + 1;
+        res[0] = Math.max(res[0],dia);
+        
+        return Math.max(l,r) + 1;
     }
 }
