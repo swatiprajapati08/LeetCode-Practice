@@ -16,24 +16,20 @@
 class Solution {
     int sum = 0;
     public int sumNumbers(TreeNode root) {
-        Helper(root,"");
-        return sum;
+        
+        return Helper(root,0);
+        
     }
-    void Helper(TreeNode root,String s){
+    int Helper(TreeNode root,int val){
         
         if(root == null)
-            return;
+            return 0;
         
+        val = val * 10 + root.val;
         if(root.left == null && root.right == null){
-            //reached to leaf node
-            // sb.append(root);
-            // String s = sb.reverse().toString();
-            s += root.val;
-            sum += Integer.parseInt(s);
-            return;
+         return val;
         }
         
-        Helper(root.left,s+root.val+"");
-        Helper(root.right,s+root.val+"");
+        return Helper(root.left,val) + Helper(root.right,val);
     }
 }
