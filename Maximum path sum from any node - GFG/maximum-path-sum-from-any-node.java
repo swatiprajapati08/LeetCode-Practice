@@ -130,8 +130,8 @@ class Solution
        int l = findMaxSum(node.left,res);
        int r = findMaxSum(node.right,res);
        
-        l = l < 0 ? 0 : l;
-        r = r < 0 ? 0 : r;
+        // l = l < 0 ? 0 : l;
+        // r = r < 0 ? 0 : r;
         // node.data = node.data < 0 ? 0: node.data;
        
        int temp = Math.max(Math.max(l,r)+node.data,node.data); // i'm not included
