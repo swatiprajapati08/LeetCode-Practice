@@ -133,9 +133,7 @@ class Solution {
         int r = find(root.right,res);
         
         int temp = 1 + Math.max(l,r); // i can't be answer
-        int ans = Math.max(temp,1+r+l); // i can be answer
-        
-        res[0] = Math.max(res[0],ans);
+        res[0] = Math.max(res[0],1+r+l);
         return temp;
     }
 }
