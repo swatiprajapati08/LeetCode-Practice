@@ -130,17 +130,19 @@ class Solution
        int l = findMaxSum(node.left,res);
        int r = findMaxSum(node.right,res);
        
-        // l = l < 0 ? 0 : l;
-        // r = r < 0 ? 0 : r;
-        // node.data = node.data < 0 ? 0: node.data;
+       int temp = max(max(l,r) + node.data, node.data);
+       int ans = max4(node.data,node.data+l,node.data+r,l+r+node.data);
        
-       int temp = Math.max(Math.max(l,r)+node.data,node.data); // i'm not included
-       int ans = Math.max(l+r+node.data,temp);
-       
-       res[0]= Math.max(res[0], ans);
+       res[0] =Math.max(ans,res[0]);
        
        return temp;
-       
-       
+    }
+    int max(int x, int y){
+        if (x > y)
+            return x;
+        return y;
+    }
+    int max4(int x, int y, int z, int a){
+        return max(max(max(x, y), z), a);
     }
 }
