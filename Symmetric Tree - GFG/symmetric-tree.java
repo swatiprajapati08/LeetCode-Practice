@@ -138,25 +138,13 @@ class GfG
     
     static boolean Helper(Node p, Node q)
     {
-        Queue<Node> queue = new LinkedList<Node>();
-        queue.add(p);
-        queue.add(q);
-        
-        while(!queue.isEmpty())
-        {
-            p = queue.poll();
-            q = queue.poll();
-            
-            if (p == null && q == null) continue;
-            else if (p == null || q == null) return false;
-            else if (p.data != q.data) return false;
-            
-            queue.add(p.left);
-            queue.add(q.right);
-            queue.add(p.right);
-            queue.add(q.left);
+        if(p == null && q == null) return true;
+        else if(p == null || q == null) return false;
+        else if(p.data == q.data){
+            return Helper(p.left,q.right) && Helper(p.right,q.left);
         }
-        return true;
+        else
+        return false;
 
     }
 }
