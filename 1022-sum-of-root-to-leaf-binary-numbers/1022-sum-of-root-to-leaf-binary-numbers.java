@@ -16,19 +16,19 @@
 class Solution {
     int sum = 0;
     public int sumRootToLeaf(TreeNode root) {
-        Helper(root,"");
+        Helper(root,0);
         return sum;
     }
-    public void Helper(TreeNode root,String s){
+    public void Helper(TreeNode root,int s){
         if(root.left == null && root.right == null){
-            s+= root.val;
-            sum += Integer.parseInt(s,2);
+            s= s * 2 + root.val;
+            sum += s;
             return;
         }
         if(root.left != null)
-            Helper(root.left , s + root.val+"");
+            Helper(root.left , s * 2 + root.val);
         
         if(root.right != null)
-            Helper(root.right , s + root.val+"");
+            Helper(root.right , s * 2 + root.val);
     }
 }
