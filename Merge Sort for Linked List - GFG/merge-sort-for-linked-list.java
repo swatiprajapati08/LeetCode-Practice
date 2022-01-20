@@ -75,9 +75,7 @@ class Solution
     //Function to sort the given linked list using Merge Sort.
     static Node mergeSort(Node head)
     {
-       if(head == null)
-       return null;
-       if(head.next == null) return new Node(head.data);
+       if(head == null|| head.next == null) return head;
        
     //   find mid
     
@@ -90,6 +88,7 @@ class Solution
         slow = slow.next;
         fast = fast.next.next;
     }
+    
     prev.next = null;
     
     Node left = mergeSort(head);
