@@ -120,25 +120,21 @@ class GfG {
 class Solution
 {   
     //Function to return a list of BST elements in a given range.
-  
+    ArrayList<Integer> ans= new ArrayList<>();
 	public static ArrayList<Integer> printNearNodes(Node root,int low,int high) {
-   ArrayList<Integer> list = new ArrayList<>();
-        rangeNode(root , low ,high , list);
-        return list;
+       ArrayList<Integer> ans= new ArrayList<>();
+       
+       inorder(root,low,high,ans);
+       return ans;
+    }
+    
+    static void inorder(Node root,int low,int high,ArrayList<Integer> ans){
+        if(root == null) return;
         
+        inorder(root.left,low,high,ans);
+        if(low <= root.data && root.data <= high)
+        ans.add(root.data);
+        inorder(root.right,low,high,ans);
     }
-    static void rangeNode(Node root , int l , int r , ArrayList<Integer> list){
-        if ( root == null)
-            return;
-        else if ( root.data > l && root.data > r)
-            rangeNode( root.left , l , r , list);
-        else if ( root.data < l && root.data < r)
-            rangeNode( root.right , l , r , list);
-        else{
-            
-            rangeNode(root.left , l , r , list);
-            list.add(root.data);
-            rangeNode(root.right , l , r, list);
-        }
-    }
+    
 }
