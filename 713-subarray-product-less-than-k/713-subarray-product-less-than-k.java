@@ -5,6 +5,7 @@ class Solution {
          
         int prod = 1, left = 0,count = 0;
          for(int right = 0; right < nums.length;right++){
+             
             prod *= nums[right];
             
             //invalid --> left increment
