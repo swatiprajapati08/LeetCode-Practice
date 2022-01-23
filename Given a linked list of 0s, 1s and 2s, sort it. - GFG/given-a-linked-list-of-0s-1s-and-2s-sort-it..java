@@ -104,9 +104,6 @@ class Solution
             head = head.next;
         }
         two.next = null;
-        one.next = null;
-        zero.next = null;
-        
         one.next = twoD.next;
         zero.next = oneD.next;
         
