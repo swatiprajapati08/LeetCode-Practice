@@ -18,7 +18,7 @@ class Solution {
             
             if(head.next == null || head.val != head.next.val){
                 tail.next = head;
-                tail = head;
+                tail = tail.next;
                 head = head.next;
             }
             else{
