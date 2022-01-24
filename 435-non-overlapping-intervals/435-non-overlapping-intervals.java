@@ -19,7 +19,7 @@ class Solution {
        for(int i = 0; i<n;i++){
            if(arr[i].start >= limit){
                count++;
-               limit = Math.max(limit,arr[i].end);
+               limit = arr[i].end;
            }
        }
        
