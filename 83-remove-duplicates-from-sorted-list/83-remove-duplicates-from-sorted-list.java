@@ -20,11 +20,6 @@ class Solution {
                 prev.next = head;
                 prev = prev.next;
             }
-            else{
-                int data = prev.val;
-                while(head.val != data)
-                    head = head.next;
-            }
             
             head = head.next;
         }
