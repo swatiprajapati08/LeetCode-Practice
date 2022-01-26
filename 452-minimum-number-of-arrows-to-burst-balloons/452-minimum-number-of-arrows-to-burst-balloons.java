@@ -8,7 +8,7 @@ class Solution {
             
             if(pair[0] > limit){
                 ans++;
-            limit = Math.max(pair[1],limit);
+            limit = pair[1];
             }
             
         }
