@@ -16,34 +16,39 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        HashMap<Node,Node> hm = new HashMap<>();
-        //add All Nodes
-        Node head2 = new Node(-1);
-        Node original = head;
-        Node tail = head2;
+        if(head == null) return null;
         
-        //creation of deep copy
-        while(original != null){
-            Node duplicate = new Node(original.val);
-            tail.next = duplicate;
-            
-            
-            hm.put(original,duplicate);
-            tail = duplicate;
-            original = original.next;
+        Node curr = head;
+//         Insert duplicate in between
+        while(curr != null){
+            Node next = curr.next; //B
+            Node duplicate = new Node(curr.val);  //A'
+            curr.next = duplicate; //A -> A'
+            duplicate.next = next; // A' -> B
+            curr = duplicate.next; // A->A'->B
         }
         
-        //updating random pointer
-        original = head;
-        while(original != null){
-            Node randomNode = original.random;
-            
-            if(randomNode != null){
-               randomNode = hm.get(randomNode); 
-            }
-            hm.get(original).random = randomNode;
-            original = original.next;
+        curr = head;
+        while(curr != null){
+           Node randomNode = curr.random;
+            if(randomNode != null)
+                randomNode = randomNode.next;
+            curr.next.random = randomNode;
+            curr = curr.next.next;
         }
-        return head2.next;
+       
+        Node org = head;
+        Node dupH = head.next;
+        
+        while(org != null){
+            Node dup = org.next; 
+        org.next = org.next.next;
+            
+        if(dup.next != null)
+            dup.next = dup.next.next;
+        
+            org = org.next;
+        }
+        return dupH;
     }
 }
