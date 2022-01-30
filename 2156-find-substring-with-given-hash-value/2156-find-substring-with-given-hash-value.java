@@ -32,13 +32,13 @@ class Solution {
 //          }
        
         for(int i =0; i <= s.length() - k;i++){
-            long val =0;
-              for(int j =i;j < i + k;j++){
-                
-               int temp = (s.charAt(j) -'a' + 1);
-                        
-               val += temp  * powerarr[j - i];
+            String str = s.substring(i,i + k);
             
+            long val =0;
+              for(int j =0;j < k;j++){
+               int temp = (str.charAt(j) -'a' + 1);
+                        
+              val += temp * powerarr[j];
                 // System.out.println(val);
             }
             
