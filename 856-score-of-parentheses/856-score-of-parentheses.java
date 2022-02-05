@@ -11,11 +11,10 @@ class Solution {
                 while(score.peek() != -1)
                     val+= score.pop();
                 
+                score.pop(); //remove =-1
                 if(val == 0){ // () -> 1
-                    score.pop(); //remove =-1
                     score.push(1);
                 }else{
-                   score.pop();
                    score.push(2*val);
                 }
             }
