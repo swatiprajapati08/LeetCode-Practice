@@ -1,5 +1,8 @@
 class Solution {
     public int findPairs(int[] nums, int target) {
+        //word play hai
+        //they want 3 , 1 as pairs thats why absolute 
+        // hmra vla 1,3 aa rha h so always positive legaga 2 pointer hii bs word play
      Arrays.sort(nums);
         int i = 0, j = 1,ans = 0;
         while(i < nums.length && j < nums.length){
