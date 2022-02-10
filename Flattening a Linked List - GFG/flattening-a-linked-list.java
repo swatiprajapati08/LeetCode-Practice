@@ -122,7 +122,6 @@ class GfG
     {
 	  if(root == null || root.next == null)
 	  return root;
-	  
 	  Node b = flatten(root.next);
 	  return merge(root,b);
     }
@@ -141,19 +140,11 @@ class GfG
             }
         }
         
-        while(root1 != null){
+        if(root1 != null)
         dummy.bottom = root1;
-        dummy = root1;
-        root1 = root1.bottom;       
-        }
         
-        
-         while(root2 != null){
-             dummy.bottom = root2;
-             dummy = root2;
-             root2 = root2.bottom;
-         }
-        
+         if(root2 != null)
+        dummy.bottom = root2;
         
         return res.bottom;
     }
