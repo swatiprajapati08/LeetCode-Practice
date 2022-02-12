@@ -26,11 +26,10 @@ class Solution {
             return;
         }
         temp.add(root.val);
-        if(targetSum - root.val == 0 && root.left == null && root.right == null){
-            ArrayList<Integer> curr = new ArrayList<>();
-            for(Integer i:temp)
-                curr.add(i);
-            res.add(curr);
+        if(root.left == null && root.right == null){
+            if(targetSum == root.val){
+               res.add(new ArrayList<>(temp));
+            }
         }
         Helper(root.left,targetSum - root.val,temp,res);
         Helper(root.right,targetSum - root.val,temp,res);
