@@ -18,18 +18,10 @@ class Solution {
         
         if(node == null)
             return false;
-        targetSum -= node.val;
-        if(targetSum == 0 && node.left == null && node.right == null)
-            return true;
+        if(node.left == null && node.right == null)
+            return node.val == targetSum;
         
-        boolean ans = hasPathSum(node.left,targetSum) || 
-                      hasPathSum(node.right,targetSum);
-        
-        targetSum += node.val;
-        
-        if(ans == true)
-            return true;
-        
-        return false;
+        return hasPathSum(node.left,targetSum - node.val) || 
+                      hasPathSum(node.right,targetSum - node.val);
     }
 }
