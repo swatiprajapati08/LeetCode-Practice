@@ -32,9 +32,12 @@ class Solution {
         
         if(root == null) return;
         
+        //left edge removed
         long leftSubTree = root.left == null ? 0 : root.left.val;
         long leftAns = leftSubTree * (Sum - leftSubTree); 
         
+        
+        //right edge removed
         long rightSubTree = root.right == null ? 0 : root.right.val;
         long rightAns = rightSubTree * (Sum - rightSubTree); 
         
