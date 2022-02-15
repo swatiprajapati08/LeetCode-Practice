@@ -55,10 +55,8 @@ class Solution {
             if(!visited[i]){
               if(dfs(i,visited,extra,adj))
                   return true;
-            } else{ 
-                if(extra[i] == true)
+            } else if(extra[i] == true)
                 return true;
-            }
         }
         //backtrack
         extra[s] = false;
