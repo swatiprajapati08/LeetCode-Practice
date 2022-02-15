@@ -109,9 +109,10 @@ class Solution
     public static void removeLoop(Node head){
         // code here
         // remove the loop without losing any nodes
-        Node prev = head;
-        Node slow = head;
+        
         Node fast = head;
+        Node slow = head;
+        Node prev = head;
         
         while(fast != null && fast.next != null){
             prev = slow;
@@ -119,12 +120,11 @@ class Solution
             fast = fast.next.next;
             
             if(slow == fast){
-                Node temp = head;
-                
-                while(temp != slow){
+                Node ptr = head;
+                 while(ptr != slow){
                     prev = slow;
+                    ptr = ptr.next;
                     slow = slow.next;
-                    temp = temp.next;
                 }
                 prev.next = null;
                 return;
