@@ -112,49 +112,39 @@ class GfG {
 class Solution
 {
     //Function to find the vertical order traversal of Binary Tree.
+   
     static ArrayList <Integer> verticalOrder(Node root)
     {
-      if(root==null) return null;
-       ArrayList<Integer> list = new ArrayList<>();
-       
-       // Do a BFS and store every node with a priority
-       TreeMap<Integer, ArrayList<Integer>> map = new TreeMap<>();
-       Queue<Pair> queue = new LinkedList<>();
-       
-       queue.add(new Pair(root, 0));
-       while (!queue.isEmpty()) {
-           Pair p = queue.poll();
-           Node n = p.node;
-           int order = p.order; 
-           
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+        TreeMap<Integer,TreeMap<Integer,List<Integer>>> hs = new TreeMap<>();
         
-           
-           if (!map.containsKey(order)) {
-               map.put(order, new ArrayList<>());
-           }
-           map.get(order).add(n.data);
-           if(n.left!=null)
-               queue.add(new Pair(n.left, order - 1));
-           if(n.right!=null)
-               queue.add(new Pair(n.right, order + 1));
-       }
-       
-       for (ArrayList<Integer> ordered : map.values()) {
-           list.addAll(ordered);
-       }
-       return list;
-   }
-   
+        
+        DFS(root,0,0,hs);
+        
+        for(Integer col : hs.keySet()){
+            TreeMap<Integer,List<Integer>> curr = hs.get(col);
+            for(Integer row : curr.keySet()){
+                List<Integer> res = curr.get(row);
+                for(int i:res)
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+    static void DFS(Node root,int row,int col,TreeMap<Integer,TreeMap<Integer,List<Integer>>> hs){
+    
+        if(root == null) return;
+      
+        if(!hs.containsKey(col)){
+            hs.put(col,new TreeMap<>());
+        }
+        if(!hs.get(col).containsKey(row))
+        hs.get(col).put(row,new ArrayList<>());
 
-   private static class Pair {
-       Node node;
-       int order;
-       
-       Pair(Node n, int o) {
-           node = n;
-           order = o;
-       }
-   
-   
-   }
+        hs.get(col).get(row).add(root.data);
+        
+        DFS(root.left,row + 1,col - 1,hs);
+        DFS(root.right,row + 1,col + 1,hs);
+    }   
 }
