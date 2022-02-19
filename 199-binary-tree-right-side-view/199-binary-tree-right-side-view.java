@@ -26,14 +26,25 @@ class Solution {
        return ans;
     }
     
+//     void DFS(TreeNode root,int level,TreeMap<Integer,Integer> hs){
+        
+//         if(root == null) return;
+//         if(!hs.containsKey(level))
+//         hs.put(level,root.val);
+        
+//         DFS(root.right,level + 1,hs);
+//         DFS(root.left,level + 1,hs);
+        
+//     }
+    
+    // if every time update then call left the right
     void DFS(TreeNode root,int level,TreeMap<Integer,Integer> hs){
         
         if(root == null) return;
-        if(!hs.containsKey(level))
+        
         hs.put(level,root.val);
         
-        DFS(root.right,level + 1,hs);
         DFS(root.left,level + 1,hs);
-        
+        DFS(root.right,level + 1,hs);
     }
 }
