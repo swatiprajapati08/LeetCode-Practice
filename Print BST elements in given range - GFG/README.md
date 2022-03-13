@@ -1,5 +1,5 @@
 # Print BST elements in given range
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a Binary Search Tree<strong>&nbsp;</strong>and a range <strong>[low, high]</strong>. Find all&nbsp;the numbers&nbsp;in the BST that lie in the given range.<br>
 <strong>Note:</strong> Element greater than or equal to root go to the right side.</span></p>
