@@ -14,19 +14,31 @@
  * }
  */
 class Solution {
-    int sum = 0;
+
     public int rangeSumBST(TreeNode root, int low, int high) {
-        inorder(root,low,high);
+      if (root == null)
+            return 0;
+ 
+ 
+        Stack<TreeNode> s = new Stack<TreeNode>();
+        TreeNode curr = root;
+        int sum = 0;
+        
+        while (curr != null || s.size() > 0)
+        {
+            while (curr !=  null)
+            {
+                s.push(curr);
+                curr = curr.left;
+            }
+
+            curr = s.pop();
+            
+            if(curr.val >= low && high >= curr.val)
+                 sum += curr.val;
+            
+            curr = curr.right;
+        }
         return sum;
-    }
-    void inorder(TreeNode root,int low,int high){
-        if(root == null) return;
-        
-        inorder(root.left,low,high);
-        
-        if(low <= root.val && root.val <= high)
-        sum += root.val;
-        
-        inorder(root.right,low,high);
     }
 }
