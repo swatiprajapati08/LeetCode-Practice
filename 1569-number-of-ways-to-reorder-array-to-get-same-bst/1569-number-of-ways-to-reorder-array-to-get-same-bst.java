@@ -1,6 +1,6 @@
 class Solution {
-    private int MOD = 1000000007;
-    private long[][] pascal;
+    private static int MOD = 1000000007;
+    private static long[][] pascal;
     public int numOfWays(int[] nums) {
         if(pascal == null)
             calculatePascal();
@@ -9,12 +9,12 @@ class Solution {
         
         for(int i:nums)
             arr.add(i);
-            
+            // jo return ho rha hai usene khud ka input vala array be include kiya hai so to remove that we need to do -1
         return (int)(noOfWays(arr)) - 1;
     }
     
     long noOfWays(ArrayList<Integer> nums){
-        if(nums.size() <= 2)
+        if(nums.size() <= 2)  //[ 4, 5]  no of ways to arrange 1 bcs root toh hat gya na
             return 1;
         
         int root = nums.get(0);
@@ -26,10 +26,10 @@ class Solution {
             else
                 right.add(nums.get(i));
         }
-        
+         // ek toh fix kr ke combination bna liya thn left and right subtree p call kr diya 
         return pascal[left.size() + right.size()][left.size()]% MOD * noOfWays(left) % MOD * noOfWays(right) % MOD;
     }
-    
+    // to calaculate all combinations 
     void calculatePascal(){
         pascal = new long[1000][1000];
         for(int i = 0;i<1000;i++){
