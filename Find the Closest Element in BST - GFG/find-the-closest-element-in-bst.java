@@ -104,7 +104,7 @@ class Solution
     
     static int minDiff(Node  root, int K) 
     { 
-        if(root == null) return K;
+        if(root == null) return Integer.MAX_VALUE;
         
         if(root.data == K) return 0;
         
