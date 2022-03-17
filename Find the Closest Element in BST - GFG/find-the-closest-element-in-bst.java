@@ -101,7 +101,7 @@ class Solution
 {
     //Function to find the least absolute difference between any node
     //value of the BST and the given integer.
-    static int mindiff = Integer.MAX_VALUE;
+    
     static int minDiff(Node  root, int K) 
     { 
         if(root == null) return K;
