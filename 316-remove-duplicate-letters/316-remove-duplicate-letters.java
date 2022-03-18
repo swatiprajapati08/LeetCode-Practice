@@ -1,36 +1,30 @@
 class Solution {
     public String removeDuplicateLetters(String s) {
-        Stack<Character> st = new Stack<>();
+        Deque<Character> q = new ArrayDeque<>();
         int freq[] = new int[26];
-        for(char ch:s.toCharArray())
-            freq[ch - 'a']++;
+        boolean inQ[] = new boolean[26];
         
-        HashSet<Character> hs = new HashSet<>();
+        for(char c:s.toCharArray())
+            freq[c -'a']++;
         
-        for(char ch:s.toCharArray()){
-            //remove the 
-            freq[ch - 'a']--;
-            if(hs.contains(ch)) continue;
+        for(char c:s.toCharArray()){
             
-            while(st.size() > 0 && st.peek() > ch){
-                if(freq[st.peek() - 'a'] > 0){
-                    hs.remove(st.peek());
-                    st.pop();
-                }else{
-                    break;
-                }
+            freq[c - 'a']--;
+            if(inQ[c - 'a'] == true) continue;
+            
+            while(q.size() > 0 && q.getLast() > c && freq[q.getLast() - 'a'] > 0){
+                inQ[q.removeLast() - 'a'] = false;
             }
             
-            //push yourself
-                st.push(ch);
-                hs.add(ch); 
-           
+            q.addLast(c);
+            inQ[c -'a'] = true;
+            
         }
         
         StringBuilder sb = new StringBuilder();
-        while(st.size() > 0)
-            sb.append(st.pop());
+        while(q.size() > 0)
+            sb.append(q.remove());
         
-        return sb.reverse().toString();
+        return sb.toString();
     }
 }
