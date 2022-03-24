@@ -1,17 +1,18 @@
 class Solution {
-    public int numRescueBoats(int[] people, int limit) {
+    public int numRescueBoats(int[] arr, int limit) {
         int count = 0;
-        ArrayList<Integer> arr = new ArrayList<>();
-        for(int i:people){
-            if(i >= limit) count++;
-            else{
-                arr.add(i);
-            }
-        }
-        Collections.sort(arr);
-        int l = 0, r = arr.size() - 1;
+        // ArrayList<Integer> arr = new ArrayList<>();
+        // for(int i:people){
+        //     if(i >= limit) count++;
+        //     else{
+        //         arr.add(i);
+        //     }
+        // }
+        //no need to do the upper part as it has been already taken care of
+        Arrays.sort(arr);
+        int l = 0, r = arr.length - 1;
         while(l <= r){
-            if(arr.get(l) + arr.get(r) > limit){
+            if(arr[l] + arr[r] > limit){
                 count++;
                 r--;
             }else{
