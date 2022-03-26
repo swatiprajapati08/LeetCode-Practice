@@ -15,20 +15,13 @@
  */
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
-        ArrayList<Integer> ans = new ArrayList<>();
-        getAll(root,ans);
-        HashSet<Integer> hs = new HashSet<>();
-        for(int i:ans){
-            if(hs.contains(k-i))
-                return true;
-            hs.add(i);
-        }
-        return false;
+        return findTarget(root,new HashSet<>(),k);
     }
-    void getAll(TreeNode root,ArrayList<Integer> pre){
-        if(root == null) return;
-        pre.add(root.val);
-        getAll(root.left,pre);
-        getAll(root.right,pre);
+    boolean findTarget(TreeNode root,HashSet<Integer> hs,int k){
+        if(root == null) return false;
+        if(hs.contains(k-root.val)) return true;
+        hs.add(root.val);
+        return findTarget(root.left,hs,k) || findTarget(root.right,hs,k);
+       
     }
 }
