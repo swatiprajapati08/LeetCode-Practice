@@ -66,6 +66,7 @@ class Solution
             if(!visited[i] &&  dfs(graph,visited,i,n,counter + 1) )
                 return true;
         }
+        //zaruri ni jis path s ja rhe ans mil jyega hi so unmark that.
         visited[src] = false;
         return false;
     }
