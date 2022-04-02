@@ -1,35 +1,30 @@
 class Solution {
-     private int count =0;
     public int islandPerimeter(int[][] grid) {
-        
-        for(int i =0;i<grid.length;i++)
-        {
-            for(int j =0;j<grid[0].length;j++)
-            {
-                if(grid[i][j] == 1)
-                {
-                    dfs(grid,i,j);
-                    break;
+        int landCell = 0, overlapping  = 0;
+        for(int i =0;i < grid.length; i++){
+            for(int j = 0; j< grid[0].length;j++){
+                if(grid[i][j] == 1){
+                    landCell++;
+                    boolean right = (j != grid[0].length - 1); // check its right exist o not
+                    boolean down = (i != grid.length - 1);
+                    
+                    if(!right && !down)
+                        continue;
+                    else if(right == true && down == false){
+                        if(grid[i][j + 1] == 1)
+                            overlapping++;
+                    }else if(right == false && down == true){
+                        if(grid[i + 1][j] == 1)
+                            overlapping++;
+                    }else{
+                        if(grid[i][j + 1] == 1)
+                            overlapping++;
+                        if(grid[i + 1][j] == 1)
+                            overlapping++;
+                    }
                 }
             }
         }
-        return count;
-    }
-     void dfs(int grid[][],int i,int j)
-    {
-        if(i<0 || i>=grid.length || j<0 || j >= grid[0].length|| grid[i][j] == 0 )
-        {
-            count+=1;
-            return;
-        }
-        
-        if(grid[i][j] == -1)
-            return;
-        grid[i][j] = -1;
-        dfs(grid,i+1,j);
-        dfs(grid,i-1,j);
-        dfs(grid,i,j+1);
-        dfs(grid,i,j-1);
-        return;
+        return ((4 * landCell )- (2 * overlapping));
     }
 }
