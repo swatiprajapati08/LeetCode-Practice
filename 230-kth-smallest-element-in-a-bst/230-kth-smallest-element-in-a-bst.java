@@ -16,23 +16,25 @@
 class Solution {
     int val;
     public int kthSmallest(TreeNode root, int k) {
-         val = k;
-        return kthSmallerHelper(root);
+        val = k;
+        return kthSmallestHelper(root);
     }
     
-    int kthSmallerHelper(TreeNode root){
+    int kthSmallestHelper(TreeNode root){
         if(root == null)
             return -1;
         
-        int ans = kthSmallerHelper(root.left);
+        int ans = -1;
+        ans = kthSmallestHelper(root.left);
+        
         if(ans != -1)
             return ans;
-        
         val--;
+        
         if(val == 0)
             return root.val;
         
-        ans = kthSmallerHelper(root.right);
+        ans = kthSmallestHelper(root.right);
         return ans;
     }
 }
