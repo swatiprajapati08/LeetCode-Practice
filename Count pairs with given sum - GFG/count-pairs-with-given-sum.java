@@ -30,13 +30,13 @@ public class GFG {
 //User function Template for Java
 
 class Solution {
-    int getPairsCount(int[] nums, int n, int k) {
+    int getPairsCount(int[] arr, int n, int k) {
         HashMap<Integer,Integer> hm = new HashMap<>();
         int count = 0;
-        for(int i:nums){
-            if(hm.containsKey(k - i)){
-                count += hm.get(k - i);
-            }
+        for(int i:arr){
+            if(hm.containsKey(k - i))
+            count+= hm.get(k - i);
+            
             hm.put(i,hm.getOrDefault(i,0) + 1);
         }
         return count;
