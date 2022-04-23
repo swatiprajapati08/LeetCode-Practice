@@ -1,5 +1,5 @@
 # Minimum steps to minimize n as per given condition
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a number <strong>N</strong>, the task is to count minimum steps to minimize it to 1 according to the following criteria:</span></p>
 
