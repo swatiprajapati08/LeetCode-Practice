@@ -23,7 +23,7 @@ class Solution {
             for(int j = 0; j<coins.length;j++)
                 dp[i][j] = -1;
         }
-        int ans = memo3(dp,coins,amount,0);
+        int ans = memo2(dp,coins,amount,0);
         if(ans == Integer.MAX_VALUE) return -1;
         return ans;
     }
@@ -53,7 +53,7 @@ class Solution {
         int minCoins = Integer.MAX_VALUE;
         // 9 -- 2(X), 2(1),2(2),2(3),2(4),cant take 2(5) bcz is greater
         for(int i = 0; amt >= coins[idx] * i;i++){
-            int ans = memo2(dp,coins,amt - coins[idx],idx + 1);
+            int ans = memo2(dp,coins,amt - (coins[idx] * i),idx + 1);
             if(ans < Integer.MAX_VALUE) ans += i;
             minCoins = Math.min(minCoins, ans);
         }
