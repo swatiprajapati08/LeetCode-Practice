@@ -27,6 +27,7 @@ class Solution {
         // if(ans == Integer.MAX_VALUE) return -1;
         // return ans;
     }
+    //PERMUTATION
     int memo(int dp[],int amt,int coins[]){
         
         if(amt == 0) return 0; //minimum coins
@@ -42,7 +43,7 @@ class Solution {
         
         return dp[amt] = 1 + min;
     }
-    
+    //COMBINATION
     int memo2(int dp[][],int coins[], int amt, int idx){
         if(amt == 0) return 0;
         if(coins.length == idx) return Integer.MAX_VALUE;
@@ -60,6 +61,7 @@ class Solution {
         
         return dp[amt][idx] = minCoins;
     }
+    //COMBINATION (UNBOUNDED KNAPSACK)
     int memo3(int dp[][],int coins[], int amt, int idx){
         if(amt == 0) return 0;
         if(coins.length == idx || amt < 0) return Integer.MAX_VALUE;
