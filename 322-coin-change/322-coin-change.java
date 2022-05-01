@@ -1,31 +1,31 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        // int dp[] = new int[amount + 1];
+      int dp[] = new int[amount + 1];
 //         Arrays.fill(dp,-1);
 //         int ans = memo(dp,amount,coins);
             
 //         return  ans == Integer.MAX_VALUE ? -1 : ans;
         
-        // dp[0] = 0;
-        // for(int i = 1;i<=amount; i++){
-        //     int min = Integer.MAX_VALUE - 1;
-        //     for(int j = 0; j < coins.length;j++){
-        //         if(dp[i] - coins[j] >= 0)
-        //             min = Math.min(min,dp[i] - coins[j]);
-        //     }
-        //     dp[i] = 1 + min;
-        // }
-        // return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
-        
-        
-        int dp[][] = new int[amount + 1][coins.length];
-        for(int i = 0; i<= amount;i++){
-            for(int j = 0; j<coins.length;j++)
-                dp[i][j] = -1;
+        dp[0] = 0;
+        for(int i = 1;i<=amount; i++){
+            int min = Integer.MAX_VALUE - 1;
+            for(int j = 0; j < coins.length;j++){
+                if(i - coins[j] >= 0)
+                    min = Math.min(min,dp[i - coins[j]]);
+            }
+            dp[i] = 1 + min;
         }
-        int ans = memo2(dp,coins,amount,0);
-        if(ans == Integer.MAX_VALUE) return -1;
-        return ans;
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+        
+        
+        // int dp[][] = new int[amount + 1][coins.length];
+        // for(int i = 0; i<= amount;i++){
+        //     for(int j = 0; j<coins.length;j++)
+        //         dp[i][j] = -1;
+        // }
+        // int ans = memo2(dp,coins,amount,0);
+        // if(ans == Integer.MAX_VALUE) return -1;
+        // return ans;
     }
     int memo(int dp[],int amt,int coins[]){
         
