@@ -31,6 +31,8 @@ class Solution {
             return dp[amt][idx];
         
         //int minCoins = Integer.MAX_VALUE - 1 ;
+             // if yes then dete rho 
+            // if no means move to next element(order is maintained) => combination
         int no = memo3(dp,coins,amt,idx + 1);
         int yes = memo3(dp,coins,amt - coins[idx],idx);
         
