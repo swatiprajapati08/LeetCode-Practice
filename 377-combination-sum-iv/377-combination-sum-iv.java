@@ -1,10 +1,21 @@
 class Solution {
     public int combinationSum4(int[] nums, int target) {
-      int dp[] = new int[target + 1];
-        Arrays.fill(dp,-1);
-        int ans = memo(dp,target,nums);
+//       int dp[] = new int[target + 1];
+//         Arrays.fill(dp,-1);
+//         int ans = memo(dp,target,nums);
             
-        return  ans;  
+//         return  ans;  
+        int dp[] = new int[target + 1];
+        dp[0] = 1;
+        for(int i = 1; i <= target;i++){
+            for(int j : nums){
+                if(i - j >= 0)
+                    dp[i] += dp[i - j];
+            }
+        }
+            
+        return dp[target];
+        
     }
      int memo(int dp[],int amt,int coins[]){
         
