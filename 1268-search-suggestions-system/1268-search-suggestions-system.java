@@ -1,83 +1,79 @@
 class Solution {
-      public static class Node{
-        private Node[] children = new Node[26];
-        private boolean isEnd = false;
+    public static class Node{
+        boolean isEnd = false;
+        Node children[] = new Node[26];
+        
+        public boolean isEnd(){
+            return isEnd;
+        }
+        public void setEnd(){
+            isEnd = true;
+        }
         
         public boolean contains(char ch){
             return (children[ch - 'a'] != null);
         }
         
-        public Node get(char ch){
-            return children[ch - 'a'];
-        }
-        
-        public void set(char ch){
+        public void setChar(char ch){
             children[ch - 'a'] = new Node();
         }
         
-        public boolean getEnd(){
-            return isEnd;
+        public Node get(char ch){
+            return children[ch - 'a'];
         }
-        
-        public void setEnd(){
-            isEnd = true;
-        }
-    }
-      public void insert(Node root,String word) {
-            Node curr = root;
-            for(int i=0; i<word.length(); i++){
-                char ch = word.charAt(i);
-
-                if(curr.contains(ch) == false)
-                    curr.set(ch);
-
-                curr = curr.get(ch);
-            }
-
-            curr.setEnd();
-        }
-    public boolean search(Node root,String word) {
-        Node curr = root;
-        for(int i=0; i<word.length(); i++){
-            char ch = word.charAt(i);
-
-            if(curr.contains(ch) == false)
-                return false;
-        
-            curr = curr.get(ch);
-        }
-        
-        return curr.getEnd();
     }
     
-    public void DFS(Node root,String ssf,List<String> ans,int k){
-        if(ans.size() == k) return;
+    public void insert(Node root,String word){
+        Node curr = root;
         
-        if(root.getEnd() == true)
-            ans.add(ssf);
+        for(char ch:word.toCharArray()){
+            if(curr.contains(ch) == false)
+                curr.setChar(ch);
+            curr = curr.get(ch);
+        }
+        curr.setEnd();
+    }
+    
+    public boolean search(Node root,String word){
+        Node curr = root;
+        for(char ch: word.toCharArray()){
+            if(curr.contains(ch) == false)
+                return false;
+            curr = curr.get(ch);
+        }
+        return curr.isEnd();
+    }
+    
+    public void DFS(Node root,String ssf,List<String> temp, int k){
+        if(temp.size() == k) return;
         
-        for(char ch = 'a'; ch<= 'z';ch++){
-            if(root.contains(ch) == true)
-                DFS(root.get(ch),ssf+ch,ans,k);
+        if(root.isEnd == true)
+            temp.add(ssf);
+
+        
+        for(char c ='a'; c <= 'z'; c++){
+            if(root.contains(c) == true){
+                DFS(root.get(c),ssf + c,temp,k);
+            }
         }
     }
+    
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         Node root = new Node();
         
-        for(String s:products)
-            insert(root,s);
-        
+        for(String product : products)
+            insert(root,product);
+        // store the result
         List<List<String>> res = new ArrayList<>();
-        for(int i =0;i<searchWord.length();i++){
+        for(int i = 0; i< searchWord.length();i++){
             char ch = searchWord.charAt(i);
-            
             if(root.contains(ch) == true){
                 root = root.get(ch);
-                List<String> ans = new ArrayList<>();
-                DFS(root,searchWord.substring(0,i + 1),ans,3);
-                res.add(ans);
-            } 
-            else
+                List<String> tempAns = new ArrayList<>();
+                //add all words
+                DFS(root,searchWord.substring(0,i + 1),tempAns,3);
+                res.add(tempAns);
+            }else
                 break;
         }
         
