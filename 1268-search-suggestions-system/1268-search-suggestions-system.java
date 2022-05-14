@@ -53,6 +53,8 @@ class Solution {
         
         for(char c ='a'; c <= 'z'; c++){
             if(root.contains(c) == true){
+                // don't do  root = root.get(ch) it will change the root by default we have 
+                //to traverse all word from a to z 
                 DFS(root.get(c),ssf + c,temp,k);
             }
         }
