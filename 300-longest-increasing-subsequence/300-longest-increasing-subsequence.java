@@ -1,4 +1,6 @@
 class Solution {
+    // TIME O(N2)
+    // space -> memo O(N2) tab O(N)
     public int lengthOfLIS(int[] nums) {
         int dp[] = new int[nums.length];
         
