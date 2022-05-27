@@ -8,12 +8,12 @@ class Solution {
         
         for(int i = 1; i < n; i++){
             if(arr[i - 1] < arr[i])
-                left[i] = Math.max(left[i - 1] + 1,left[i]);
+                left[i] =left[i - 1] + 1;
         }
         
          for(int i = n - 2; i >= 0; i--){
             if(arr[i + 1] < arr[i])
-                right[i] = Math.max(right[i + 1] + 1,right[i]);
+                right[i] = right[i + 1] + 1;
         }
         
         
