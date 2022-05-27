@@ -1,19 +1,23 @@
 class Solution {
     // TIME O(N2)
     // space -> memo O(N2) tab O(N)
-    public int lengthOfLIS(int[] nums) {
-        int dp[] = new int[nums.length];
+//     public int lengthOfLIS(int[] nums) {
+//         int dp[] = new int[nums.length];
         
-        Arrays.fill(dp,1); // no call already taken {1},{2} // single element taken
-        int maxLIS = 1;
-        for(int i = 0; i < nums.length;i++){
-            // find all its prev index, if prev index element is smaller then current 
-            for(int j = 0; j < i; j++){
-                if(nums[j] < nums[i])
-                    dp[i] = Math.max(dp[i],dp[j] + 1);
-            }
-            maxLIS = Math.max(maxLIS,dp[i]);
-        }
+//         Arrays.fill(dp,1); // no call already taken {1},{2} // single element taken
+//         int maxLIS = 1;
+//         for(int i = 0; i < nums.length;i++){
+//             // find all its prev index, if prev index element is smaller then current 
+//             for(int j = 0; j < i; j++){
+//                 if(nums[j] < nums[i])
+//                     dp[i] = Math.max(dp[i],dp[j] + 1);
+//             }
+//             maxLIS = Math.max(maxLIS,dp[i]);
+//         }
+        
+        
+        
+        //
         
         // int max = 1;
         // // answer can end any index 
@@ -21,8 +25,8 @@ class Solution {
         //     max = Math.max(i,max);
         // return max;
         
-        return maxLIS;
-    }
+    //     return maxLIS;
+    // }
 //         int dp[][] = new int[nums.length][nums.length + 1];
 //         for(int[] arr: dp)
 //             Arrays.fill(arr,-1);
@@ -44,4 +48,37 @@ class Solution {
       
 //        return dp[index][prev + 1] = Math.max(yes,no);
 //     }
+    
+    public int lengthOfLIS(int[] nums){
+        // using BInary search
+     ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(nums[0]);
+        for(int i = 1; i< nums.length;i++){
+            if(arr.get(arr.size() - 1) < nums[i])
+                arr.add(nums[i]);
+            else{
+                int index = lowerIndex(arr,nums[i]);
+                arr.set(index,nums[i]);
+            }
+        }
+        return arr.size();
+    }
+    
+    int lowerIndex(ArrayList<Integer> nums,int search){
+        int low = 0, high = nums.size() -1 ;
+        int index = -1;
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            if(nums.get(mid) >= search){
+                index = mid;
+                high = mid - 1;
+            }else 
+                low = mid + 1;
+        }
+        return index;
+    }
 }
+
+
+
+
