@@ -1,39 +1,25 @@
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-        int m = text1.length();
-        int n = text2.length();
-        int dp[][] = new int[m + 1][n + 1];
-        for(int i = 0; i <= m; i++){
-            for(int j = 0; j <= n; j++){
-                if(i == 0 || j == 0){
-                    dp[i][j] = 0;
-                }
-                else if(text1.charAt(i - 1) == text2.charAt(j - 1))
-                    dp[i][j] = 1 + dp[i - 1][j - 1];
-                else 
-                    dp[i][j] = Math.max(dp[i - 1][j],dp[i][j - 1]);
-            }
-        }
-        //printing LCS
-        StringBuilder sb = new StringBuilder();
-        int index1 = m , index2 = n;
-        while(index1 > 0 && index2 > 0){
-            if(text1.charAt(index1 - 1) == text2.charAt(index2 - 1)){
-                sb.append(text1.charAt(index1 - 1));
-                index1--;
-                index2--;
-            }
-            else{
-                //do not match
-                if(dp[index1 - 1][index2] > dp[index1][index2-1])
-                    index1--;
-                else
-                    index2--;
-            }
-        }
-        System.out.println(sb.reverse().toString());
+        int dp[][] = new int[text1.length()][text2.length()];
+        for(int arr[] : dp)
+            Arrays.fill(arr,-1);
+        return LCS(text1,0, text2,0,dp);
+    }
+    
+    int LCS(String text1,int i, String text2 , int j, int dp[][]){
         
+        if(i == text1.length() || j == text2.length())
+            return 0;
         
-        return dp[m][n];
+        if(dp[i][j] != -1)
+            return dp[i][j];
+        
+        // common character
+        if(text1.charAt(i) == text2.charAt(j))
+            dp[i][j] = 1 + LCS(text1, i + 1, text2,j + 1,dp);
+        else
+            dp[i][j] = Math.max(LCS(text1,i + 1,text2, j,dp), LCS(text1, i, text2, j + 1,dp));
+        
+        return dp[i][j];
     }
 }
