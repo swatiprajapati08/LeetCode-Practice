@@ -7,19 +7,34 @@ class Solution {
         
         int m = text1.length();
         int n = text2.length();
-        int dp[][] = new int[m + 1][n + 1];
+//         int dp[][] = new int[m + 1][n + 1];
         
-        for(int i= m ; i>= 0; i--){
+//         for(int i= m ; i>= 0; i--){
+//             for(int j =n ; j >= 0; j--){
+//                 if(i == m || j == n)
+//                     dp[i][j] = 0;
+//                 else if(text1.charAt(i) == text2.charAt(j))
+//                     dp[i][j] = 1 + dp[i + 1][j + 1];
+//                 else
+//                     dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+//             }
+//         }
+//         return dp[0][0];
+        int []next = new int[text2.length() + 1];
+         for(int i= m ; i>= 0; i--){
+             int[] curr = new int[text2.length() + 1];
+             
             for(int j =n ; j >= 0; j--){
                 if(i == m || j == n)
-                    dp[i][j] = 0;
+                    curr[j] = 0;
                 else if(text1.charAt(i) == text2.charAt(j))
-                    dp[i][j] = 1 + dp[i + 1][j + 1];
+                    curr[j] = 1 + next[j + 1];
                 else
-                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+                    curr[j] = Math.max(next[j],curr[j + 1]);
             }
-        }
-        return dp[0][0];
+            next = curr;
+         }
+        return next[0];
     }
     
     int LCS(String text1,int i, String text2 , int j, int dp[][]){
