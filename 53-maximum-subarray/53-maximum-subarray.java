@@ -1,12 +1,15 @@
 class Solution {
     public int maxSubArray(int[] nums) {
-        int max=nums[0],maxsf=nums[0];
+        int max = 0, maxSum = Integer.MIN_VALUE;
         
-        for(int i=1;i<nums.length;i++)
-        {
-            max=Math.max(nums[i],max+nums[i]);
-            maxsf=Math.max(max,maxsf);
+        for(int i: nums){
+            // phle vale sum me add ho jao
+           if(i <= max + i)
+               max = max + i;
+            else
+                max = i;
+            maxSum = Math.max(max,maxSum);
         }
-        return maxsf;
+        return maxSum;
     }
 }
